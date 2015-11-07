@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Robot Companion App</string>
+
+    <!-- Texts -->
+    <string name="homeTitle">Here are some test Settings</string>
+    <string name="pairedDevices">Paired Devices</string>
+    <string name="availableDevices">Available Devices</string>
+
+    <!-- Buttons -->
+    <string name="bluetooth">Bluetooth</string>
+</resources>
