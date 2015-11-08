@@ -1,7 +1,7 @@
 # Mapping-Robot
 School project, Robot powered by an Arduino.
 
-This repository will contain all the ressources that we will find and create to build our robot.
+This repository will contain all the ressources we will find and create to build our robot.
 
 Research Subject (formulation may change over time): "How can the robot replace the humain after a desaster"
 Examples: Fukushima's nuclear disaster,
@@ -20,4 +20,4 @@ During this project we will be making:
 - A robot powered by an arduino board, it will be able to avoid obstacles and send informations to the app for         further processing. 
 - The robot script that will drive all the sensors and motors.
 
-Every ressources that we've made a open source, you might use them without any conditions.
+Every ressources that we've made are open source, you might use them without any conditions.
