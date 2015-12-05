@@ -6,38 +6,41 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity
+{
     private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
-    private Set<BluetoothDevice> pairedDevices = new HashSet<>();
-
-    private BluetoothAdapter bluetoothAdapter;
 
     private ListView devicesListView;
-    private ArrayList<String> devicesArray;
-    private ArrayAdapter<String> devicesAdapter;
+    private BluetoothAdapter bluetoothAdapter;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         devicesListView = (ListView) findViewById(R.id.listView);
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode != REQUEST_CODE_ENABLE_BLUETOOTH)
@@ -88,20 +91,49 @@ public class Home extends AppCompatActivity {
 
     private void GetPairedDevices ()
     {
-        pairedDevices = bluetoothAdapter.getBondedDevices();
+        ArrayAdapter<String> devicesAdapter;
+        final Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+        final ArrayList<String> devicesArrayName;
+        final ArrayList<BluetoothDevice> devicesArray;
 
         if (pairedDevices.size() > 0)
         {
+            devicesArrayName = new ArrayList<>();
             devicesArray = new ArrayList<>();
 
             for (BluetoothDevice device : pairedDevices)
             {
-                devicesArray.add(device.getName());
+                devicesArrayName.add(device.getName());
+                devicesArray.add(device);
             }
 
-            devicesAdapter = new ArrayAdapter<>(this, R.layout.custom_textview, devicesArray);
+            devicesAdapter = new ArrayAdapter<>(this, R.layout.custom_textview, devicesArrayName);
             devicesListView.setAdapter(devicesAdapter);
 
+            devicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick (AdapterView <?> parent, View view, int position, long id)
+                {
+                    //Iterator <BluetoothDevice> it = pairedDevices.iterator();
+
+                    BluetoothDevice selectedDevice = devicesArray.get(position);
+
+                    if (pairedDevices.contains(selectedDevice)){
+                        Toast.makeText(Home.this, "Connecting to  " + selectedDevice.getName(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    /*while (it.hasNext())
+                    {
+                        selectedDevice = it.next();
+                        if (selectedDevice.getName().equals(selectedDeviceName))
+                        {
+                            //Toast.makeText(Home.this, "Found " + selectedDevice.getName(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }*/
+                }
+            });
 
         }
         else
@@ -109,5 +141,7 @@ public class Home extends AppCompatActivity {
             Toast.makeText(Home.this, "No Paired Devices found", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //private ConnectThread extends
 
 }
