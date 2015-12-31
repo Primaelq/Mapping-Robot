@@ -13,12 +13,21 @@ AF_DCMotor motorLeft (4);
 Servo servo1;
 
 long obstacleDistance;
+
+long rightObstacleDistance = 0;
+long leftObstacleDistance = 0;
+
 long lecture_echo;
 
 int i = 0;
 int instruction = 0;
 
+int rightIR = 0;
+int leftIR = 0;
+
 bool turningRight = false;
+
+bool rightWheelRay = false;
 
 enum State
 {
@@ -37,25 +46,30 @@ void setup()
   Serial1.begin (9600);
 
   servo1.attach(9);
+  servo1.write (90);
 
   pinMode(trigPin, OUTPUT);
   digitalWrite(trigPin, LOW);
   pinMode(echoPin, INPUT);
 
-  motorRight.setSpeed (150);
+  motorRight.setSpeed (75);
   motorRight.run (RELEASE);
 
-  motorLeft.setSpeed (150);
+  motorLeft.setSpeed (75);
   motorLeft.run (RELEASE);
 
   state = stand;
+
+  delay (8000);
 }
 
 void loop()
 {
-  /*DistanceCalculation ();
+  DistanceCalculation ();
 
-  motorRight.run (FORWARD);
+  Serial.println (obstacleDistance);
+
+  /*motorRight.run (FORWARD);
   motorLeft.run (FORWARD);
 
   if (i <= 50)
@@ -87,7 +101,21 @@ void loop()
     TurnRight ();
   }
   
-  delay (5);*/
+  delay (5);
+
+  Serial.println (map(analogRead(A8), 0, 1000, 0, 1));
+  Serial.println (analogRead(A8));
+
+  rightIR = analogRead(A8);
+  leftIR = analogRead(A9);
+
+  delay (10);
+
+  if (rightIR < 100 && rightWheelRay == false)
+  {
+    rightWheelRay = true;
+    
+  }
   
   if (Serial1.available () > 0)
   {
@@ -119,7 +147,7 @@ void loop()
       break;
       
     case 5:
-      state = 0stand;
+      state = stand;
       break;
 
     default:
@@ -127,8 +155,8 @@ void loop()
       break;
   }
 
-  Serial.println (instruction);
-  Serial1.write (state);
+  //Serial.println (instruction);
+  //Serial1.write (state);
 
   switch (state)
   {
@@ -149,8 +177,30 @@ void loop()
       break;
 
     case stand:
-      Stand ();
+      GoForward ();
+  }*/
+
+  /*if (obstacleDistance > 20)
+  {
+    GoForward ();
   }
+  else
+  {
+    Stand ();
+  }*/
+  
+  /*
+  else
+  {
+    Stand ();
+
+    servo1.write (0);
+
+    delay (2000);
+
+    servo1.write (180);
+    
+  }*/
   
 }
 
@@ -203,5 +253,5 @@ void DistanceCalculation ()
   digitalWrite(trigPin, LOW);
   lecture_echo = pulseIn(echoPin, HIGH);
   obstacleDistance = lecture_echo / 58;
-  Serial1.write (obstacleDistance);
+  //Serial1.write (obstacleDistance);
 }
