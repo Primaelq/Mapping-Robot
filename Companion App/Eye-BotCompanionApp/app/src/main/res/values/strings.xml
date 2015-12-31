@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Eye-Bot Companion App</string>
+
+    <string name="welcome">Welcome</string>
+    <string name="please_connect_robot">Please connect to your robot</string>
+    <string name="connected_to">Connected to</string>
+    <string name="lets_see">Let\'s see what we can do</string>
+    <string name="remote">Remote</string>
+    <string name="mapping">Mapping</string>
+    <string name="remote_settings">Remote Settings</string>
+    <string name="right_button">Right Button Value</string>
+    <string name="left_button">Left Button Value</string>
+    <string name="up_button">Up Button Value</string>
+    <string name="down_button">Down Button Value</string>
+    <string name="a_button">A Button Value</string>
+    <string name="b_button">B Button Value</string>
+</resources>

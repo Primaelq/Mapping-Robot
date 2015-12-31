@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:id="@+id/welcomeTV" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/please_connect_robot"
+        android:layout_below="@+id/welcomeTV"
+        android:layout_alignParentStart="true"
+        android:textSize="15sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="10dp"
+        android:textColor="#ffffff"
+        android:id="@+id/pleaseConnectTV" />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_bluetooth_white"
+        android:layout_marginEnd="24dp"
+        android:layout_alignBottom="@+id/pleaseConnectTV"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/btScanBT" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/pleaseConnectTV"
+        android:layout_above="@+id/doneBT"
+        android:id="@+id/devicesLV"/>
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/splash_done_bt"
+        android:id="@+id/doneBT" />
+
+</RelativeLayout>

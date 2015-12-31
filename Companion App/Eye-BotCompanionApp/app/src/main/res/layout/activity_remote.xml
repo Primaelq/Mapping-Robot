@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainmenu_bg">
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/left_button"
+        android:layout_marginStart="25dp"
+        android:layout_alignTop="@+id/rightBT"
+        android:layout_alignParentStart="true"
+        android:id="@+id/leftBT" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/right_button"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/leftBT"
+        android:layout_marginStart="45dp"
+        android:id="@+id/rightBT" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/up_button"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/rightBT"
+        android:id="@+id/upBT" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/down_button"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/upBT"
+        android:layout_alignStart="@+id/upBT"
+        android:id="@+id/downBT" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/a_button"
+        android:layout_marginEnd="108dp"
+        android:layout_alignTop="@+id/downBT"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/aBT" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/b_button"
+        android:layout_marginEnd="25dp"
+        android:layout_above="@+id/aBT"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/bBT" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_settings_white"
+        android:id="@+id/remoteSettingsBT"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
