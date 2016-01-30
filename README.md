@@ -3,15 +3,15 @@ School project, Robot powered by an Arduino.
 
 This repository will contain all the ressources we will find and create to build our robot.
 
-Research Subject (formulation may change over time): "How can the robot replace the humain after a desaster"
+Research Subject : "How can the robot assist humains after a desaster"
 Examples: Fukushima's nuclear disaster,
           Nepal's Earthquake in April 2015.
 
 Here's a list of the components we will be using for this project (unfinished):
 - Arduino mega 2560 Board.
 - Motor Shield.
-- 3 Ultrasonics sensors (We might add some more).
-- 3 Infrared sensors (We might add some more).
+- 3 Ultrasonics sensors.
+- 3 Infrared sensors.
 - Bluetooth receiver/transmitter.
 - 2 Gear Motors, 2 Wheels.
 
