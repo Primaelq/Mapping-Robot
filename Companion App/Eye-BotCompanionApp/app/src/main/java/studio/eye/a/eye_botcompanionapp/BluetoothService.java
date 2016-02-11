@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class BluetoothService extends Service
     BluetoothAdapter btAdapter;
 
     static ConnectedThread connectedThread;
+
+    static String receivedMessage;
 
     @Override
     public void onCreate ()
@@ -68,11 +71,13 @@ public class BluetoothService extends Service
     {
         SplashScreen.isConnected = true;
         connectedThread = new ConnectedThread((BluetoothSocket) msg.obj);
+        connectedThread.start();
     }
 
     public static void SendOverBluetooth (String message)
     {
         connectedThread.write(message.getBytes());
+        Log.d("debug", "sent: " + new String (message.getBytes()));
     }
 
     private class ConnectThread extends Thread
@@ -135,7 +140,7 @@ public class BluetoothService extends Service
         }
     }
 
-    private class ConnectedThread extends Thread
+    private class ConnectedThread extends Thread implements Runnable
     {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
@@ -146,6 +151,8 @@ public class BluetoothService extends Service
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
+
+            Log.d("Debug", "Connected thread started ");
 
             // Get the input and output streams, using temp objects because
             // member streams are final
@@ -163,24 +170,48 @@ public class BluetoothService extends Service
             mmOutStream = tmpOut;
         }
 
+        @Override
         public void run()
         {
-            byte[] buffer; // buffer store for the stream
-            int bytes; // bytes returned from read()
+            Log.d("Debug", "Running");
+
+            byte[] buffer = new byte[1024]; // buffer store for the stream
+            int bytes = 0; // bytes returned from read()
 
             // Keep listening to the InputStream until an exception occurs
             while (true)
             {
                 try
                 {
-                    buffer = new byte[1024];
                     // Read from the InputStream
-                    bytes = mmInStream.read(buffer);
+                    buffer[bytes] = (byte) mmInStream.read();
                     // Send the obtained bytes to the UI activity
-                    mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer).sendToTarget();
+                    //Log.d("Debug", "bytes: " + bytes);
+
+                    Log.d("Debug", "buffer: " + buffer[bytes]);
+
+                    if (buffer[bytes] == '#')
+                    {
+                        StringBuilder mes = new StringBuilder();
+                        for (int i = 1 ; i < bytes ; i++)
+                        {
+                            mes.append(buffer[i]);
+                        }
+                        char msgType = (char) buffer[0];
+                        receivedMessage = mes.toString();
+
+                        Log.d("Debug", msgType + " : " + receivedMessage);
+
+                        bytes = 0;
+                        buffer = new byte[1024];
+                        //mHandler.obtainMessage(MESSAGE_READ, bytes, -1, buffer).sendToTarget();
+                    }else{
+                        bytes++;
+                    }
                 }
                 catch (IOException e)
                 {
+                    Log.d("Debug", "Something went wrong");
                     break;
                 }
             }
@@ -233,15 +264,14 @@ public class BluetoothService extends Service
             {
                 case SUCCESS_CONNECT:
                     s += SplashScreen.selectedDevice.getName();
-                    //Toast.makeText(activity, "Connected", Toast.LENGTH_SHORT).show();
                     SplashScreen.stateTextView.setText(s);
                     bs.startConnectedThread(msg);
                     break;
 
                 case MESSAGE_READ:
                     byte[] readBuf = (byte[])msg.obj;
-                    String receivedMessage = new String(readBuf);
-                    //Toast.makeText(activity, receivedMessage, Toast.LENGTH_SHORT).show();
+                    receivedMessage = new String(readBuf);
+                    Log.d("debug", "received: " + receivedMessage);
                     break;
             }
         }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class RemoteControl extends Activity
 {
@@ -19,12 +20,14 @@ public class RemoteControl extends Activity
     Button b_button;
     Button settings_button;
 
+    TextView receivedText;
+
     @Override
     public void onCreate (Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote);
-        init ();
+        init();
     }
 
     @Override
@@ -52,6 +55,8 @@ public class RemoteControl extends Activity
         a_button = (Button) findViewById(R.id.aBT);
         b_button = (Button) findViewById(R.id.bBT);
         settings_button = (Button) findViewById(R.id.remoteSettingsBT);
+
+        receivedText = (TextView) findViewById(R.id.receivedText);
 
         settings_button.setOnClickListener(new View.OnClickListener()
         {
@@ -114,11 +119,9 @@ public class RemoteControl extends Activity
             }
         });
 
-        b_button.setOnClickListener(new View.OnClickListener()
-        {
+        b_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 onClickAnimation(b_button);
                 BluetoothService.SendOverBluetooth("a2");
             }

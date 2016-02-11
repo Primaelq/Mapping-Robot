@@ -130,9 +130,9 @@ public class SplashScreen extends Activity implements AdapterView.OnItemClickLis
         btScan.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onClickAnimation(btScan);
-                startDiscovery();
                 availableDevicesArray.clear();
                 devicesAdapter.clear();
+                startDiscovery();
                 Toast.makeText(SplashScreen.this, "Scanning ...", Toast.LENGTH_SHORT).show();
             }
         });

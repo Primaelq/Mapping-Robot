@@ -14,4 +14,5 @@
     <string name="down_button">Down Button Value</string>
     <string name="a_button">A Button Value</string>
     <string name="b_button">B Button Value</string>
+    <string name="received_text">Received Text</string>
 </resources>
