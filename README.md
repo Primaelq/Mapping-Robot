@@ -13,7 +13,7 @@ Here's a list of the components we will be using for this project (unfinished):
 - 3 Ultrasonics sensors.
 - 3 Infrared sensors.
 - Bluetooth receiver/transmitter.
-- 2 Gear Motors, 2 Wheels.
+- 2 DC Motors, 2 Wheels.
 
 During this project we will be making:
 - An android app that will allowed the user to setup the robot and receive some informations. This informations will   be used to create a map of the robot environment.
